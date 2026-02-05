@@ -1,11 +1,19 @@
+
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.FileNotFoundException;
+import static org.mockito.Mockito.*;
+import org.mockito.Mock;
+import org.mockito.InjectMocks;
+import org.mockito.junit.MockitoJUnit;
+import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class CipherTest {
