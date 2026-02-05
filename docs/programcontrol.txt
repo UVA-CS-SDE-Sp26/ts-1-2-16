@@ -1,0 +1,34 @@
+ProgramControl
+Joshua Thirumalai (rpw9fb)
+02/05/26
+
+================
+--- Purpose ---
+================
+This file will connect the file handler to the command line, and will take file contents and return readable text.
+When there are no arguments, this will provide a list of files from Team Member B, with a corresponding number.
+
+============
+--- UML ---
+============
++String files()
++String retrieve(int num)
++String retrieve(int num, String key)
+
+==================
+--- PseudoCode ---
+==================
+files method:
+    ArrayList of files using Team Member B's FileHandler
+    return all files as one string
+
+retrieve with default key:
+    get name from filehandler made by Team Member B
+    get contents from filehandler made by Team Member B
+    return the contents deciphered from Team Member D's Cipher decipher
+
+retrieve with key:
+    get name and contents from Team Member B filehandler
+    return contents deciphered using the key
+
+
