@@ -1,1 +1,25 @@
-test1
+UserInterface
+James Beck (cxv4ms)
+02/10/2026
+
+================
+--- Purpose ---
+================
+Responsible for the command line interface used by the user to run the program
+
+==============================
+--- Command Prompt Options ---
+==============================
+To run the program, run java topsecret.
+    No arguments: if run with no arguments, the program prints out a numbered
+        list of files from the data folder.
+    One argument: if run with a number argument, the program prints out the
+        contents of the file corresponding to the provided number. If the file
+        is encrypted, a default cipher will be used to decrypt it. If the
+        number does not have an associated file, or the first argument is not a
+        number, the program will print an error message.
+    Two arguments: if run with a number and a key, the program will print out
+        the contents of the file, and use the provided key to decrypt it. If
+        the provided key is invalid, the program will print an error message.
+    3+ arguments: if three or more arguments are given, the program will print
+        an error message
