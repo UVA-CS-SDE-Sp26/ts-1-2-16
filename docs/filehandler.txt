@@ -6,18 +6,25 @@ Goal:
 
 Given a request for a file in the data folder -> return the contents of that file
 
-Implementation:
+Implementation/UML:
 
-- Method which is given an input which is the file being requested -> method will return a string with the contents
-  - filehandler(String filename) -> String filecontents
+FileHandler
+-------------------
+-content: String
+-------------------
++handle()
++getContent()
++setContent()
 
 - Cases
+  Handle Class
   1. Request for a file that works and is found within data
   2. Request for a file that exists within project but is not within data
   3. Request for a file that does not exist
   4. Request for a file that doesn't contain text (Audio File, PNG, ... etc.)
 
 - Testing
+  Handle Class
   Case 1. Should return the full contents of that file
   Case 2. Should gracefully fail and ask for a proper file within data by returning an error string
   Case 3. Should gracefully fail and ask for a proper file within data by returning an error string
