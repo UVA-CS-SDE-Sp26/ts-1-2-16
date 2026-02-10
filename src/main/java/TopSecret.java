@@ -15,6 +15,7 @@ public class TopSecret {
 
   }
 
+  // String File Name -> String File Contents
   private static String filehandler(String filename) {
     // Checks files only within data folder
     Path dataDir = Paths.get("data").toAbsolutePath();
