@@ -5,30 +5,33 @@ Joshua Thirumalai (rpw9fb)
 ================
 --- Purpose ---
 ================
-This file will connect the file handler to the command line, and will take file contents and return readable text.
-When there are no arguments, this will provide a list of files from Team Member B, with a corresponding number.
+Connects the FileHandler to the command line interface.
+When executed with no arguments, it displays a numbered list of available files (Team Member B).
+When file number provided, it retrieves the file contents and returns readable text (Team Member D's cipher).
 
 ============
 --- UML ---
 ============
-+String files()
++String listFiles()
 +String retrieve(int num)
 +String retrieve(int num, String key)
 
 ==================
 --- PseudoCode ---
 ==================
-files method:
-    ArrayList of files using Team Member B's FileHandler
-    return all files as one string
+listFiles method:
+    * get ArrayList of filenames from FileHandler
+    * loop through list and format each file with a number
+    * return all files combined into one string
 
-retrieve with default key:
-    get name from filehandler made by Team Member B
-    get contents from filehandler made by Team Member B
-    return the contents deciphered from Team Member D's Cipher decipher
+retrieve(int num): default key
+    * get filename at index num from FileHandler
+    * get contents and pass to cipher decipher
+    * return deciphered contents
 
-retrieve with key:
-    get name and contents from Team Member B filehandler
-    return contents deciphered using the key
+retrieve(int num, String key):
+    * get filename at index num
+    * get file contents and pass contents WITH key to decipher
+    * return deciphered contents
 
 
