@@ -46,7 +46,7 @@ public class ProjectControl
         String filename = files[num].getName();
         String contents = fileHandler.handle(filename);
 
-        return "not done"; // change to form of "Cipher.decipher(contents);"
+        return "not done"; // change to form of "Cipher.decipher(contents)"
     }
 
     // retrieve using input key
@@ -63,7 +63,7 @@ public class ProjectControl
         String filename = files[num].getName();
         String contents = fileHandler.handle(filename);
 
-        return "not done"; // change to form of "Cipher.decipher(contents, key);"
+        return "not done"; // change to form of "Cipher.decipher(contents, key)"
     }
 
 }
