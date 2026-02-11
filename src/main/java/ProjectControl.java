@@ -2,7 +2,12 @@ import java.io.File;
 
 public class ProjectControl
 {
-    private static FileHandler fileHandler = new FileHandler();
+    private  FileHandler fileHandler;
+
+    public ProjectControl(FileHandler fileHandler)
+    {
+        this.fileHandler = fileHandler;
+    }
 
     // numbered list of files
     public static String listFiles()
@@ -33,7 +38,7 @@ public class ProjectControl
     }
 
     // retrieve using default key
-    public static String retrieve(int num)
+    public String retrieve(int num)
     {
         File folder = new File("data");
         File[] files = folder.listFiles();
@@ -50,7 +55,7 @@ public class ProjectControl
     }
 
     // retrieve using input key
-    public static String retrieve(int num, String key)
+    public String retrieve(int num, String key)
     {
         File folder = new File("data");
         File[] files = folder.listFiles();
