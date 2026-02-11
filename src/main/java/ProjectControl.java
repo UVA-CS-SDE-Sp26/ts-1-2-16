@@ -65,5 +65,4 @@ public class ProjectControl
 
         return "not done"; // change to form of "Cipher.decipher(contents, key)"
     }
-
 }
