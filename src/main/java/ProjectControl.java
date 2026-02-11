@@ -2,7 +2,7 @@ import java.io.File;
 
 public class ProjectControl
 {
-    private  FileHandler fileHandler;
+    private FileHandler fileHandler;
 
     public ProjectControl(FileHandler fileHandler)
     {
