@@ -1,15 +1,17 @@
 public class TopSecret {
     void main(String[] args) {
+        System.out.println(argument_handler(args));
+    }
 
+
+    public String argument_handler(String[] args){
         if (args.length > 3) {
-            System.out.println("To many arguments");
-            return;
+            return "To many arguments";
         }
 
         //If no arguments provided, output the list of files in the data folder.
         if (args.length == 1) {
-            System.out.println(ProjectControl.listFiles());
-            return;
+            return ProjectControl.listFiles();
         }
 
         ProjectControl pc = new ProjectControl(new FileHandler());
@@ -19,19 +21,17 @@ public class TopSecret {
         try {
             file_number = Integer.parseInt(args[1]);
         } catch (Exception e) {
-            System.out.println("The first argument wasn't an integer");
-            return;
+            return "The first argument wasn't an integer";
         }
 
         //If one argument provided, output the contents of the specified file
         //using the default key to decipher.
         if (args.length == 2) {
-            System.out.println(pc.retrieve(file_number));
-            return;
+            return pc.retrieve(file_number);
         }
 
         //If two arguments provided, output the contents of the specified file
         //using the provided key to decipher.
-        System.out.println(pc.retrieve(file_number, args[2]));
+        return pc.retrieve(file_number, args[2]);
     }
 }
