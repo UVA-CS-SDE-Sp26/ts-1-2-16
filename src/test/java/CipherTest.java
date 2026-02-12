@@ -4,13 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.mockito.Mockito.*;
-import org.mockito.Mock;
-import org.mockito.InjectMocks;
-import org.mockito.junit.MockitoJUnit;
-import static org.mockito.Mockito.when;
-import org.junit.jupiter.api.extension.ExtendWith;
-
 
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
@@ -26,27 +19,20 @@ public class CipherTest {
     }
 
     @Test
-    public void testDecipherWithShift() throws IOException {
+    public void testDecipher() throws IOException {
+
         String keyPath = "ciphers/key.txt";
+
+
         Cipher cipher = new Cipher(keyPath);
 
-        // Using your specific key: 'b' is the cipher for 'a'
-        // Input "bcDE" should return "abCD"
-        String encrypted = "bcDE";
-        String expected = "abCD";
-
-        assertEquals(expected, cipher.decrypt(encrypted), "The deciphered text should match the plain text mapping.");
-    }
-    @Test
-    public void testDecipherWithSpace() throws IOException {
-        String keyPath = "ciphers/key.txt";
-        Cipher cipher = new Cipher(keyPath);
-
-        // Using your specific key: 'b' is the cipher for 'a'
-        // Input "bcde" should return "abcd"
-        String encrypted = "bc DE";
-        String expected = "ab CD";
-
-        assertEquals(expected, cipher.decrypt(encrypted), "The deciphered text should match the plain text mapping, despite space.");
+        // Test lowercase shift
+        assertEquals("abc", cipher.decrypt("bcd"));
+        // Test uppercase (unchanged)
+        assertEquals("WXY", cipher.decrypt("XYZ"));
+        // Test numbers
+        assertEquals("Z129", cipher.decrypt("1230"));
+        // Test mixed
+        assertEquals("Hello 123", cipher.decrypt("Ifmmp 234"));
     }
 }

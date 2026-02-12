@@ -1,0 +1,7 @@
+Cipher
+------------------
+-decryptionMap: Map<Character, Character>
+------------------
++Cipher(keyPath: String)
++loadKey(keyPath: String)
++decrypt(input: String): String
