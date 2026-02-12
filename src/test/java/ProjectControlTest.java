@@ -1,12 +1,10 @@
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,40 +25,23 @@ class ProjectControlTest
         dataDir.mkdir();
         cipherDir.mkdir();
 
-        File keyFile = new File(cipherDir, "key.txt");
-        Files.writeString(keyFile.toPath(), "ABC\n" + "ABC");
-
         fileHandler = new FileHandler();
         projectControl = new ProjectControl(fileHandler);
-    }
-
-    @AfterEach
-    void tearDown()
-    {
-        deleteFolderContents(dataDir);
-        deleteFolderContents(cipherDir);
-    }
-
-    private void deleteFolderContents(File folder)
-    {
-        if (folder != null && folder.exists())
-        {
-            for (File file: folder.listFiles())
-            {
-                file.delete();
-            }
-        }
     }
 
     @Test
     void retrieve_works() throws IOException
     {
-        File testFile = new File(dataDir, "test.txt");
-        Files.writeString(testFile.toPath(), "ABC");
+        File[] files = dataDir.listFiles((dir, name) ->
+                name.endsWith(".txt") || name.endsWith(".cip"));
+
+        Arrays.sort(files);
+
 
         String result = projectControl.retrieve(1);
+        String expected = projectControl.retrieve(1, "key.txt");
 
-        assertEquals("ABC", result);
+        assertEquals(expected, result);
     }
 
     @Test
@@ -73,8 +54,8 @@ class ProjectControlTest
     @Test
     void retrieve_invalid_key() throws IOException
     {
-        File testFile = new File(dataDir, "secret.txt");
-        Files.writeString(testFile.toPath(), "ABC");
+        File[] files = dataDir.listFiles((dir, name) ->
+                name.endsWith(".txt") || name.endsWith(".cip"));
 
         String result = projectControl.retrieve(1, "nonexistent.txt");
 

@@ -1,88 +1,83 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class ProjectControl
 {
     private FileHandler fileHandler;
-    private static final String DEFAULT_KEY = "ciphers/key.txt";
 
     public ProjectControl(FileHandler fileHandler)
     {
         this.fileHandler = fileHandler;
     }
 
-    // list of files (internal use)
-    private static List<File> getFiles()
+    private static File[] getValidFiles()
     {
-        File folder = new File("data");
-        File[] allFiles = folder.listFiles();
+        File folder = new File ("data");
 
-        List<File> files = new ArrayList<>();
+        File[] files = folder.listFiles((dir, name) ->
+                name.endsWith(".txt") || name.endsWith(".cip"));
 
-        StringBuilder output = new StringBuilder();
-        int count = 1;
-
-        if (allFiles != null)
+        if (files == null)
         {
-            for (File file : allFiles)
-            {
-                if (file.isFile())
-                {
-                    files.add(file);
-                }
-            }
+            return new File[0];
         }
+
+        Arrays.sort(files);
         return files;
     }
 
     public static String listFiles()
     {
-        List<File> files = getFiles();
-        if (files.isEmpty())
+        File[] files = getValidFiles();
+
+        if (files.length == 0)
         {
             return "No files available.";
         }
 
         StringBuilder output = new StringBuilder();
 
-        for (int i = 0; i < files.size(); i++)
+        for (int i = 0; i < files.length; i++)
         {
-            output.append(String.format("%02d", i + 1))
-                    .append(" ")
-                    .append(files.get(i).getName())
-                    .append("\n");
+            output.append(String.format("%02d %s",
+                    i + 1,
+                    files[i].getName()))
+                    .append(System.lineSeparator());
         }
 
-        return output.toString();
+        return output.toString().trim();
     }
 
     // retrieve using default key
     public String retrieve(int num)
     {
-        return retrieve(num, DEFAULT_KEY);
+        return retrieve(num, "key.txt");
     }
 
     // retrieve using input key
     public String retrieve(int num, String key)
     {
-        List<File> files = getFiles();
+        File[] files = getValidFiles();
 
-        if (num < 1 || num > files.size())
+        if (num < 1 || num > files.length)
         {
             return "Invalid file number.";
         }
 
-        String filename = files.get(num - 1).getName();
-        String contents = fileHandler.handle(filename);
+        String filename = files[num - 1].getName();
 
         try
         {
-            Cipher cipher = new Cipher(key);
-            return cipher.decrypt(contents);
-        } catch (IOException | IllegalArgumentException e) {
-            return "Cipher error: " + e.getMessage();
+            Cipher cipher = new Cipher("ciphers/" + key);
+            String encrypted = fileHandler.handle(filename);
+            return cipher.decrypt(encrypted);
+        } catch (IOException e)
+        {
+            return "Key file not found.";
+        } catch (IllegalArgumentException e)
+        {
+            return "Cipher error.";
         }
     }
 }
