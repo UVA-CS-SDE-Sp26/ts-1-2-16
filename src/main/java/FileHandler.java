@@ -16,7 +16,7 @@ public class FileHandler {
   public String handle(String filename) {
     // Checks files only within data folder
     Path dataDir = Paths.get("data").toAbsolutePath();
-    Path filePath = dataDir.resolve(filename).toAbsolutePath();
+    Path filePath = dataDir.resolve(filename).normalize().toAbsolutePath();
 
     // If filepath tries accessing parent directories, return invalid traversal
     if (!filePath.startsWith(dataDir)) {

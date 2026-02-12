@@ -1,0 +1,137 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/C:/Users/henry/.gradle/wrapper/dists/gradle-9.2.0-bin/11i5gvueggl8a5cioxuftxrik/gradle-9.2.0/lib/native-platform-0.22-milestone-29.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+> Task :compileJava UP-TO-DATE
+> Task :processResources NO-SOURCE
+> Task :classes UP-TO-DATE
+
+> Task :compileTestJava FAILED
+C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:11: error: cannot find symbol
+import static org.junit.jupiter.api.Assertations.*;
+                                   ^
+  symbol:   class Assertations
+  location: package org.junit.jupiter.api
+C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:12: error: cannot find symbol
+import static org.mockito.Moclito.*;
+                         ^
+  symbol:   class Moclito
+  location: package org.mockito
+C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:36: error: cannot find symbol
+        testFile.createNewFile();
+        ^
+  symbol:   variable testFile
+  location: class ProjectControlTest
+C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:38: error: cannot find symbol
+        when(fileHandler.handle("test.txt"))
+        ^
+  symbol:   method when(String)
+  location: class ProjectControlTest
+C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:42: error: cannot find symbol
+        assertEquals("not done", result);
+        ^
+  symbol:   method assertEquals(String,String)
+  location: class ProjectControlTest
+C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:43: error: cannot find symbol
+        verify(fileHandler).handle("test.txt");
+        ^
+  symbol:   method verify(FileHandler)
+  location: class ProjectControlTest
+C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:45: error: cannot find symbol
+        testFile.delete();
+        ^
+  symbol:   variable testFile
+  location: class ProjectControlTest
+C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:53: error: cannot find symbol
+        assertEquals("Invalid file number.", result);
+        ^
+  symbol:   method assertEquals(String,String)
+  location: class ProjectControlTest
+C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:64: error: cannot find symbol
+        when(fileHandler.handle("secret.txt"))
+        ^
+  symbol:   method when(String)
+  location: class ProjectControlTest
+C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:68: error: cannot find symbol
+        assertEquals("not done", result);
+        ^
+  symbol:   method assertEquals(String,String)
+  location: class ProjectControlTest
+C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:70: error: cannot find symbol
+        verify(fileHandler).handle("secret.txt");
+        ^
+  symbol:   method verify(FileHandler)
+  location: class ProjectControlTest
+11 errors
+
+[Incubating] Problems report is available at: file:///C:/Users/henry/OneDrive/Documents/CompSciClasses/SoftwareDev/Homework2/ts-1-2-16/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileTestJava'.
+> Compilation failed; see the compiler output below.
+  C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:11: error: cannot find symbol
+  import static org.junit.jupiter.api.Assertations.*;
+                                     ^
+    symbol:   class Assertations
+    location: package org.junit.jupiter.api
+  C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:12: error: cannot find symbol
+  import static org.mockito.Moclito.*;
+                           ^
+    symbol:   class Moclito
+    location: package org.mockito
+  C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:36: error: cannot find symbol
+          testFile.createNewFile();
+          ^
+    symbol:   variable testFile
+    location: class ProjectControlTest
+  C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:45: error: cannot find symbol
+          testFile.delete();
+          ^
+    symbol:   variable testFile
+    location: class ProjectControlTest
+  C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:38: error: cannot find symbol
+          when(fileHandler.handle("test.txt"))
+          ^
+    symbol:   method when(String)
+    location: class ProjectControlTest
+  C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:42: error: cannot find symbol
+          assertEquals("not done", result);
+          ^
+    symbol:   method assertEquals(String,String)
+    location: class ProjectControlTest
+  C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:43: error: cannot find symbol
+          verify(fileHandler).handle("test.txt");
+          ^
+    symbol:   method verify(FileHandler)
+    location: class ProjectControlTest
+  C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:53: error: cannot find symbol
+          assertEquals("Invalid file number.", result);
+          ^
+    symbol:   method assertEquals(String,String)
+    location: class ProjectControlTest
+  C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:64: error: cannot find symbol
+          when(fileHandler.handle("secret.txt"))
+          ^
+    symbol:   method when(String)
+    location: class ProjectControlTest
+  C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:68: error: cannot find symbol
+          assertEquals("not done", result);
+          ^
+    symbol:   method assertEquals(String,String)
+    location: class ProjectControlTest
+  C:\Users\henry\OneDrive\Documents\CompSciClasses\SoftwareDev\Homework2\ts-1-2-16\src\test\java\ProjectControlTest.java:70: error: cannot find symbol
+          verify(fileHandler).handle("secret.txt");
+          ^
+    symbol:   method verify(FileHandler)
+    location: class ProjectControlTest
+  11 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to generate a Build Scan (powered by Develocity).
+
+BUILD FAILED in 1s
+2 actionable tasks: 1 executed, 1 up-to-date
