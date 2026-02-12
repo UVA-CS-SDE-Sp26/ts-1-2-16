@@ -1,8 +1,0 @@
-﻿> Task :compileJava UP-TO-DATE
-> Task :processResources NO-SOURCE
-> Task :classes UP-TO-DATE
-
-> Task :compileTestJava FAILED
-
-[Incubating] Problems report is available at: file:///C:/Users/henry/OneDrive/Documents/CompSciClasses/SoftwareDev/Homework2/ts-1-2-16/build/reports/problems/problems-report.html
-2 actionable tasks: 1 executed, 1 up-to-date
