@@ -1,74 +1,83 @@
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 class ProjectControlTest
 {
-    @Mock
     private FileHandler fileHandler;
     private ProjectControl projectControl;
 
-    @TempDir
-    Path tempDir;
+    private File dataDir;
+    private File cipherDir;
 
     @BeforeEach
-    void setUp()
+    void setUp() throws IOException
     {
-        MockitoAnnotations.openMocks(this);
+        dataDir = new File("data");
+        cipherDir = new File("ciphers");
+
+        dataDir.mkdir();
+        cipherDir.mkdir();
+
+        File keyFile = new File(cipherDir, "key.txt");
+        Files.writeString(keyFile.toPath(), "ABC\n" + "ABC");
+
+        fileHandler = new FileHandler();
         projectControl = new ProjectControl(fileHandler);
+    }
+
+    @AfterEach
+    void tearDown()
+    {
+        deleteFolderContents(dataDir);
+        deleteFolderContents(cipherDir);
+    }
+
+    private void deleteFolderContents(File folder)
+    {
+        if (folder != null && folder.exists())
+        {
+            for (File file: folder.listFiles())
+            {
+                file.delete();
+            }
+        }
     }
 
     @Test
     void retrieve_works() throws IOException
     {
-        File dataFolder = new File("data");
-        dataFolder.mkdir();
-        File testFile = new File(dataFolder, "test.txt");
-        testFile.createNewFile();
+        File testFile = new File(dataDir, "test.txt");
+        Files.writeString(testFile.toPath(), "ABC");
 
-        when(fileHandler.handle("test.txt"))
-                .thenReturn("mocked content");
+        String result = projectControl.retrieve(1);
 
-        String result = projectControl.retrieve(0);
-        assertEquals("not done", result);
-        verify(fileHandler).handle("test.txt");
-
-        testFile.delete();
-        dataFolder.delete();
+        assertEquals("ABC", result);
     }
 
     @Test
-    void retrieve_breaks_all()
+    void retrieve_invalid_num()
     {
         String result = projectControl.retrieve(99);
         assertEquals("Invalid file number.", result);
     }
 
     @Test
-    void retrieve_breaks_wrongKey() throws IOException
+    void retrieve_invalid_key() throws IOException
     {
-        File dataFolder = new File("data");
-        dataFolder.mkdir();
-        File testFile = new File(dataFolder, "secret.txt");
-        testFile.createNewFile();
+        File testFile = new File(dataDir, "secret.txt");
+        Files.writeString(testFile.toPath(), "ABC");
 
-        when(fileHandler.handle("secret.txt"))
-                .thenReturn("mocked encrypted content");
+        String result = projectControl.retrieve(1, "nonexistent.txt");
 
-        String result = projectControl.retrieve(0, "wrongKey");
-        assertEquals("not done", result);
-
-        verify(fileHandler).handle("secret.txt");
-        testFile.delete();
-        dataFolder.delete();
+        assertTrue(result.contains("Cipher error") || result.contains("Key file not found"));
     }
 }
