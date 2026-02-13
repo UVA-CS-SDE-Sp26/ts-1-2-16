@@ -1,4 +1,6 @@
 import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 
 public class ProjectControl
 {
@@ -9,65 +11,73 @@ public class ProjectControl
         this.fileHandler = fileHandler;
     }
 
-    // numbered list of files
+    private static File[] getValidFiles()
+    {
+        File folder = new File ("data");
+
+        File[] files = folder.listFiles((dir, name) ->
+                name.endsWith(".txt") || name.endsWith(".cip"));
+
+        if (files == null)
+        {
+            return new File[0];
+        }
+
+        Arrays.sort(files);
+        return files;
+    }
+
     public static String listFiles()
     {
-        File folder = new File("data");
-        File[] files = folder.listFiles();
+        File[] files = getValidFiles();
 
-        if (files == null || files.length == 0)
+        if (files.length == 0)
         {
             return "No files available.";
         }
 
         StringBuilder output = new StringBuilder();
-        int count = 1;
 
-        for (File file : files)
+        for (int i = 0; i < files.length; i++)
         {
-            if (file.isFile())
-            {
-                output.append(String.format("%02d", count))
-                        .append(" ")
-                        .append(file.getName())
-                        .append("\n");
-                count++;
-            }
+            output.append(String.format("%02d %s",
+                            i + 1,
+                            files[i].getName()))
+                    .append(System.lineSeparator());
         }
-        return output.toString();
+
+        return output.toString().trim();
     }
 
     // retrieve using default key
     public String retrieve(int num)
     {
-        File folder = new File("data");
-        File[] files = folder.listFiles();
-
-        if (files == null || num < 0 || num >= files.length)
-        {
-            return "Invalid file number.";
-        }
-
-        String filename = files[num].getName();
-        String contents = fileHandler.handle(filename);
-
-        return "not done"; // change to form of "Cipher.decipher(contents)"
+        return retrieve(num, "key.txt");
     }
 
     // retrieve using input key
     public String retrieve(int num, String key)
     {
-        File folder = new File("data");
-        File[] files = folder.listFiles();
+        File[] files = getValidFiles();
 
-        if (files == null || num < 0 || num >= files.length)
+        if (num < 1 || num > files.length)
         {
             return "Invalid file number.";
         }
 
-        String filename = files[num].getName();
-        String contents = fileHandler.handle(filename);
+        String filename = files[num - 1].getName();
 
-        return "not done"; // change to form of "Cipher.decipher(contents, key)"
+        try
+        {
+            Cipher cipher = new Cipher("ciphers/" + key);
+            String encrypted = fileHandler.handle(filename);
+            return cipher.decrypt(encrypted);
+        } catch (IOException e)
+        {
+            return "Key file not found.";
+        } catch (IllegalArgumentException e)
+        {
+            return "Cipher error.";
+        }
     }
 }
