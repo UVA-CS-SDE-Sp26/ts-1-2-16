@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.Test;
+
+import java.sql.SQLOutput;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -27,6 +30,15 @@ public class UserInterfaceTest {
         String[] test5 = {"0", "cipher key"};
         output = UserInterface.argument_handler(test5);
         assertEquals("Invalid file number.", output, "Correct answer should be \"Invalid file number.\"");
+
+        String[] test6 = {};
+        output = UserInterface.argument_handler(test6);
+        String expected =
+                "01 carnivore.cip" + System.lineSeparator() +
+                        "02 carnivore.txt" + System.lineSeparator() +
+                        "03 cointelpro.cip" + System.lineSeparator() +
+                        "04 cointelpro.txt";
+        assertEquals(expected, output.toString());
 
     }
 
