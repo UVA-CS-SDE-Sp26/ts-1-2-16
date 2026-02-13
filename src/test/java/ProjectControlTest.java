@@ -8,8 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertations.*;
-import static org.mockito.Moclito.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class ProjectControlTest
 {
@@ -23,7 +23,7 @@ class ProjectControlTest
     @BeforeEach
     void setUp()
     {
-        MockitoAnnotations.openMocks(this)l;
+        MockitoAnnotations.openMocks(this);
         projectControl = new ProjectControl(fileHandler);
     }
 
@@ -32,7 +32,7 @@ class ProjectControlTest
     {
         File dataFolder = new File("data");
         dataFolder.mkdir();
-        File testFIle = new File(dataFolder, "test.txt");
+        File testFile = new File(dataFolder, "test.txt");
         testFile.createNewFile();
 
         when(fileHandler.handle("test.txt"))
