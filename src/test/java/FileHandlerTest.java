@@ -72,4 +72,14 @@ public class FileHandlerTest {
         e.printStackTrace();
     }
   }
+  @Test
+  public void testGetContent() {
+      assertEquals("", fileHandler.getContent());
+  }
+
+  @Test
+  public void testSetContent() {
+      fileHandler.setContent("test content");
+      assertEquals("test content", fileHandler.getContent());
+  }
 }
